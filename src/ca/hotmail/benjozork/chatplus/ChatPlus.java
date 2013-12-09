@@ -67,17 +67,8 @@ public static void main(String[] args) {
        if (nocaps == true) {
             String firstCharacter = e.getMessage().substring(0, 1).toUpperCase();
             e.setMessage(firstCharacter + e.getMessage().substring(1).toLowerCase());
-            
-        }
-        String path = "chatcontrol." + e.getPlayer().getName();
-        if (this.getConfig().getString(path) != null) {
-            String dpName = this.getConfig().getString(path);
-            Player displayPlayer = Bukkit.getServer().getPlayer(dpName);
-            e.setCancelled(true);
-            Bukkit.getServer().broadcastMessage("<" + displayPlayer.getDisplayName() + ">" + " " + e.getMessage());
         } 
      }
- 
     
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -91,7 +82,7 @@ public static void main(String[] args) {
                         sender.sendMessage(ChatColor.AQUA + "NYI commands");
                         sender.sendMessage(ChatColor.GOLD + "/cp nocmd - Block command usage");
             }
-            if (args.length > 1) {
+            if (args.length > 3) {
                 //Too many arguments
                sender.sendMessage("Too many arguments!");
                return false;
@@ -127,15 +118,30 @@ public static void main(String[] args) {
                         sender.sendMessage(ChatColor.AQUA + "NYI commands");
                         sender.sendMessage(ChatColor.GOLD + "/cp nocmd - Block command usage");
                         break;
-                    default:
+                    case "chatas":
+                        sender.sendMessage("Too few arguments!");
+                        return false;
+                   default:
                         sender.sendMessage(ChatColor.DARK_RED + "Unknown command! Type in " + ChatColor.AQUA + "/cp help");
                         break;
                 }
+              if (args.length == 3) {
+                  switch (args[0]) {
+                    case "chatas":
+                        if (args.length == 3) {
+                             String dpName = args[1];
+                             Player displayPlayer = Bukkit.getServer().getPlayer(dpName);
+                             Bukkit.getServer().broadcastMessage("<" + displayPlayer.getDisplayName() + ">" + " " + args[2]);
+                        }else {
+                            sender.sendMessage(ChatColor.DARK_RED + "Too few arguments for this command!");
+                        }
+                        break;
+                  }
+              }
                return true;
         }
         return true;
     }
     return false;
-    }  
-    
+    } 
 }
