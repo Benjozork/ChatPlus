@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -25,6 +26,7 @@ public static void main(String[] args) {
     private Logger log = Logger.getLogger("Minecraft");
     Boolean paused = false;
     Boolean nocaps = false;
+    String[] victims;
     
     public void setValue(Boolean theVal) {
     paused = theVal; // change the value
@@ -51,22 +53,31 @@ public static void main(String[] args) {
     }
     
     @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent event) {
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
         if (paused == true) {
             //Permissions/Op check
-            if (event.getPlayer().isOp() || event.getPlayer().hasPermission("chatplus.bypassPause")) {
+            if (e.getPlayer().isOp() || e.getPlayer().hasPermission("chatplus.bypassPause")) {
             }
             else {
                 //Event cancelled
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(ChatColor.DARK_RED + "You cannot talk right now!");
+                    e.setCancelled(true);
+                    e.getPlayer().sendMessage(ChatColor.DARK_RED + "You cannot talk right now!");
                 }
-            }
-        if (nocaps == true) {
-            String firstCharacter = event.getMessage().substring(0, 1).toUpperCase();
-            event.setMessage(firstCharacter + event.getMessage().substring(1).toLowerCase());
+            } 
+       if (nocaps == true) {
+            String firstCharacter = e.getMessage().substring(0, 1).toUpperCase();
+            e.setMessage(firstCharacter + e.getMessage().substring(1).toLowerCase());
+            
         }
-    }
+        String path = "chatcontrol." + e.getPlayer().getName();
+        if (this.getConfig().getString(path) != null) {
+            String vname = this.getConfig().getString(path);
+            Player victim = Bukkit.getServer().getPlayer(vname);
+            e.setCancelled(true);
+            Bukkit.getServer().broadcastMessage("<" + victim.getDisplayName() + ">" + " " + e.getMessage());
+        } 
+     }
+ 
     
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
