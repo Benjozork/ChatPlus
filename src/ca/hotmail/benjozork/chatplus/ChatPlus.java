@@ -71,10 +71,10 @@ public static void main(String[] args) {
         }
         String path = "chatcontrol." + e.getPlayer().getName();
         if (this.getConfig().getString(path) != null) {
-            String vname = this.getConfig().getString(path);
-            Player victim = Bukkit.getServer().getPlayer(vname);
+            String dpName = this.getConfig().getString(path);
+            Player displayPlayer = Bukkit.getServer().getPlayer(dpName);
             e.setCancelled(true);
-            Bukkit.getServer().broadcastMessage("<" + victim.getDisplayName() + ">" + " " + e.getMessage());
+            Bukkit.getServer().broadcastMessage("<" + displayPlayer.getDisplayName() + ">" + " " + e.getMessage());
         } 
      }
  
