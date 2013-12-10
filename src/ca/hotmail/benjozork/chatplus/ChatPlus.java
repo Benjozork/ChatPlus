@@ -118,30 +118,21 @@ public static void main(String[] args) {
                         sender.sendMessage(ChatColor.AQUA + "NYI commands");
                         sender.sendMessage(ChatColor.GOLD + "/cp nocmd - Block command usage");
                         break;
-                    case "chatas":
-                        sender.sendMessage("Too few arguments!");
-                        return false;
                    default:
                         sender.sendMessage(ChatColor.DARK_RED + "Unknown command! Type in " + ChatColor.AQUA + "/cp help");
-                        break;
+                     }
                 }
-              if (args.length == 3) {
-                  switch (args[0]) {
-                    case "chatas":
-                        if (args.length == 3) {
+                if (args.length == 3) {
+                    switch (args[0]) {
+                     case "chatas":
                              String dpName = args[1];
                              Player displayPlayer = Bukkit.getServer().getPlayer(dpName);
-                             Bukkit.getServer().broadcastMessage("<" + displayPlayer.getDisplayName() + ">" + " " + args[2]);
-                        }else {
-                            sender.sendMessage(ChatColor.DARK_RED + "Too few arguments for this command!");
-                        }
-                        break;
-                  }
-              }
-               return true;
+                             Bukkit.getServer().broadcastMessage("<" + displayPlayer.getDisplayName() + ">" + " " + args[2]);   
+                         break;
+                    }
+                }
         }
         return true;
     }
-    return false;
-    } 
-}
+} 
+
