@@ -56,7 +56,7 @@ public static void main(String[] args) {
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         if (paused == true) {
             //Permissions/Op check
-            if (e.getPlayer().isOp() || e.getPlayer().hasPermission("chatplus.bypassPause")) {
+            if  (e.getPlayer().hasPermission("chatplus.bypassPause")) {
             }
             else {
                 //Event cancelled
@@ -115,11 +115,18 @@ public static void main(String[] args) {
                         sender.sendMessage(ChatColor.GOLD + "/cp pause - Turns on/off the chat");
                         sender.sendMessage(ChatColor.GOLD + "/cp help - Displays this message");
                         sender.sendMessage(ChatColor.GOLD + "/cp nocaps - Turns on/off message LowerCasing");
+                        sender.sendMessage(ChatColor.GOLD + "/cp clear - Clears the chat");
                         sender.sendMessage(ChatColor.AQUA + "NYI commands");
                         sender.sendMessage(ChatColor.GOLD + "/cp nocmd - Block command usage");
                         break;
+                    case "clear":
+                        for(int i=0;i<100;i++) {
+                            Bukkit.broadcastMessage("");
+                        }
+                        break;
                    default:
                         sender.sendMessage(ChatColor.DARK_RED + "Unknown command! Type in " + ChatColor.AQUA + "/cp help");
+                        break;
                      }
                 }
                 if (args.length == 3) {

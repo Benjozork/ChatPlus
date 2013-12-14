@@ -1,6 +1,6 @@
 main: ca.hotmail.benjozork.chatplus.ChatPlus
 name: chatPlus
-version: 0.0.1
+version: 1.1.0
 author: benjozork
 commands:
    cp:
@@ -19,3 +19,10 @@ permissions:
         children:
             chatplus.main: false
             chatplus.bypassPause: true
+    chatplus.main:
+        description: Gives access to all chatPlus commands.
+        default: op
+    chatplus.bypassPause:
+        description: Allows an user to bypass chat pausing.
+        default: op
+    
