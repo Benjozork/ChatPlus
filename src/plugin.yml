@@ -1,4 +1,4 @@
-main: ca.hotmail.benjozork.chatplus.ChatPlus
+main: ca.hotmail.benjozork.chatplus.Main.ChatPlus
 name: chatPlus
 version: 1.1.0
 author: benjozork
@@ -7,7 +7,7 @@ commands:
       description: The main command of the plugin.
       usage: /cp <help:action>
       permission: chatplus.main
-      permission-message: You don't have <permission>
+      permission-message: &4You don't have permission for this command.
 permissions:
     chatplus.*:
         description: Gives access to all chatPlus commands.
