@@ -47,7 +47,6 @@ public class ChatPlus extends JavaPlugin implements Listener {
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
         log.info("[ChatPlus] Enabled successfully.");
         getCommand("cp").setExecutor(new CommandCp());
-        getCommand("chp").setExecutor(new CommandCp());
         this.saveDefaultConfig();
     }
 
