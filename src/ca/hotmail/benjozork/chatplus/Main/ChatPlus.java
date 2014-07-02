@@ -17,7 +17,12 @@
 package ca.hotmail.benjozork.chatplus.Main;
 
 import ca.hotmail.benjozork.chatplus.Commands.CommandCp;
+
+import java.io.IOException;
 import java.util.logging.Logger;
+
+import ca.hotmail.benjozork.chatplus.MetricsLite;
+import com.sun.javafx.font.FontStrike;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -43,6 +48,13 @@ public class ChatPlus extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        try {
+            MetricsLite metrics = new MetricsLite(this);
+            metrics.start();
+        } catch (IOException e) {
+            // Failed to submit the stats :-(
+        }
+
         instance = this;
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
         log.info("[ChatPlus] Enabled successfully.");
