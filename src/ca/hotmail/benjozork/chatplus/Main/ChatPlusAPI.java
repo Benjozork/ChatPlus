@@ -43,12 +43,13 @@ public class ChatPlusAPI {
     }
 
     public void displayHelpMessage(Player sender) {
-        sender.sendMessage(ChatColor.BLUE + "ChatPlus 1.0 by" + ChatColor.LIGHT_PURPLE + " benjozork");
+        sender.sendMessage(ChatColor.BLUE + "ChatPlus " + ChatPlus.getInstance().getDescription().getVersion() + " by" + ChatColor.LIGHT_PURPLE + " benjozork");
         sender.sendMessage(ChatColor.GOLD + "/cp pause - Turns on/off the chat");
         sender.sendMessage(ChatColor.GOLD + "/cp help - Displays this message");
         sender.sendMessage(ChatColor.GOLD + "/cp nocaps - Turns on/off message LowerCasing");
         sender.sendMessage(ChatColor.GOLD + "/cp chatas <player> <message> - Chat as another player");
         sender.sendMessage(ChatColor.GOLD + "/cp clear - Clears the chat");
+        sender.sendMessage(ChatColor.GOLD + "/cp join/leave - Broadcasts a fake join or leave message ! *trololol*");
         sender.sendMessage(ChatColor.AQUA + "NYI commands");
         sender.sendMessage(ChatColor.GOLD + "/cp nocmd - Block command usage");
     }

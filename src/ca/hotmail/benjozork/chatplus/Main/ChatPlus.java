@@ -67,8 +67,7 @@ public class ChatPlus extends JavaPlugin implements Listener {
             }
         }
         if (nocaps == true) {
-            String firstCharacter = e.getMessage().substring(0, 1).toUpperCase();
-            e.setMessage(firstCharacter + e.getMessage().substring(1).toLowerCase());
+            e.setMessage(e.getMessage().toLowerCase());
         }
     }
 }

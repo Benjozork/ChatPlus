@@ -1,6 +1,6 @@
 main: ca.hotmail.benjozork.chatplus.Main.ChatPlus
 name: chatPlus
-version: 1.1.0
+version: dev1.1.1
 author: benjozork
 commands:
    cp:
