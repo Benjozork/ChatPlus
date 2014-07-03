@@ -42,9 +42,18 @@ public class ChatPlusAPI {
         ChatPlus.getInstance().nocaps = value;
     }
 
+    public void setJoinMessage(String msg) {
+        ChatPlus.getInstance().getConfig().set("messages.join", msg);
+    }
+
+    public void setLeaveMessage(String msg) {
+        ChatPlus.getInstance().getConfig().set("messages.leave", msg);
+    }
+
     public void displayHelpMessage(Player sender) {
         sender.sendMessage(ChatColor.BLUE + "ChatPlus " + ChatPlus.getInstance().getDescription().getVersion() + " by" + ChatColor.LIGHT_PURPLE + " benjozork");
         sender.sendMessage(ChatColor.GOLD + "/cp pause - Turns on/off the chat");
+        sender.sendMessage(ChatColor.GOLD + "/cp set <parameter> <value> - Assigns a value to a parameter");
         sender.sendMessage(ChatColor.GOLD + "/cp help - Displays this message");
         sender.sendMessage(ChatColor.GOLD + "/cp nocaps - Turns on/off message LowerCasing");
         sender.sendMessage(ChatColor.GOLD + "/cp chatas <player> <message> - Chat as another player");
@@ -52,5 +61,11 @@ public class ChatPlusAPI {
         sender.sendMessage(ChatColor.GOLD + "/cp join/leave - Broadcasts a fake join or leave message ! *trololol*");
         sender.sendMessage(ChatColor.AQUA + "NYI commands");
         sender.sendMessage(ChatColor.GOLD + "/cp nocmd - Block command usage");
+    }
+
+    public void displaySetHelpMessage(Player sender) {
+        sender.sendMessage(ChatColor.AQUA + "Please use one of these parameters to set:");
+        sender.sendMessage(" - " + ChatColor.GOLD + "joinmsg");
+        sender.sendMessage(" - " + ChatColor.GOLD + "leavemsg");
     }
 }

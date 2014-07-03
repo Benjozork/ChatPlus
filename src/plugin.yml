@@ -5,12 +5,11 @@ author: benjozork
 commands:
    cp:
       description: The main command of the plugin.
-      usage: /cp <help:action>
       permission: chatplus.main
-      permission-message: &4You don't have permission for this command.
+      permission-message: You don't have permission for this command.
 permissions:
     chatplus.*:
-        description: Gives access to all chatPlus commands.
+        description: Gives access to all chatPlus commands and privileges.
         children:
             chatplus.main: true
             chatplus.bypassPause: true

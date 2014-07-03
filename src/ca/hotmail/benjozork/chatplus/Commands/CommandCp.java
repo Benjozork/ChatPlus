@@ -16,7 +16,6 @@
  */
 package ca.hotmail.benjozork.chatplus.Commands;
 
-import ca.hotmail.benjozork.chatplus.Main.ChatPlus;
 import ca.hotmail.benjozork.chatplus.Main.ChatPlusAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -68,55 +67,85 @@ public class CommandCp implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("clear")) {
                     for (int i = 0; i < 100; i++) {
                         Bukkit.broadcastMessage("");
-                        return true;
                     }
+                    return true;
                 } else if (args[0].equalsIgnoreCase("chatas")) {
                     sender.sendMessage(ChatColor.DARK_RED + "Too few arguments for command " + ChatColor.AQUA + "chatas");
                     return false;
                 } else if (args[0].equalsIgnoreCase("join") || args[0].equalsIgnoreCase("leave")) {
                     sender.sendMessage(ChatColor.DARK_RED + "Too few arguments for command " + ChatColor.AQUA + "join/leave");
                     return false;
+                } else if (args[0].equalsIgnoreCase("set")) {
+                    cpapi.displaySetHelpMessage((Player) sender);
                 } else {
                     sender.sendMessage(ChatColor.DARK_RED + "Unknown command! Type in " + ChatColor.AQUA + "/cp help");
                     return false;
                 }
             }
-            if (args.length == 2) {
-                if (args[0].equalsIgnoreCase("join")) {
-                    Bukkit.broadcastMessage(ChatColor.YELLOW + args[1] + " joined the game.");
-                    return true;
-                } else if (args[0].equalsIgnoreCase("leave")) {
-                    Bukkit.broadcastMessage(ChatColor.YELLOW + args[1] + " left the game.");
-                    return true;
-                }
+        }
+        if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("join")) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW + args[1] + " joined the game.");
+                return true;
+            } else if (args[0].equalsIgnoreCase("leave")) {
+                Bukkit.broadcastMessage(ChatColor.YELLOW + args[1] + " left the game.");
+                return true;
+            } else if (args[0].equalsIgnoreCase("set")) {
+                sender.sendMessage(ChatColor.DARK_RED + "Please assign a value to that parameter");
+                return false;
             }
-            if (args.length >= 3) {
-                if (args[0].equalsIgnoreCase("chatas")) {
-                    if (Bukkit.getServer().getPlayer(args[1]) != null) {
-                        String dpName = args[1];
-                        Player displayPlayer = Bukkit.getServer().getPlayer(dpName);
+        }
+        if (args.length >= 3) {
+            if (args[0].equalsIgnoreCase("chatas")) {
+                if (Bukkit.getServer().getPlayer(args[1]) != null) {
+                    String dpName = args[1];
+                    Player displayPlayer = Bukkit.getServer().getPlayer(dpName);
 
-                        String message;
-                        final StringBuilder bldr = new StringBuilder();
-                        for (int i = 2; i < args.length; i++) {
-                            if (i != 2) {
-                                bldr.append(" ");
-                            }
-                            bldr.append(args[i]);
+                    final StringBuilder bldr = new StringBuilder();
+                    for (int i = 2; i < args.length; i++) {
+                        if (i != 2) {
+                            bldr.append(" ");
                         }
-                        Bukkit.getServer().broadcastMessage("<" + displayPlayer.getDisplayName() + ">" + " " + bldr.toString());
-                        return true;
-                    } else {
-                        sender.sendMessage(ChatColor.DARK_RED + "This player is not online...");
-                        return false;
+                        bldr.append(args[i]);
                     }
+                    Bukkit.getServer().broadcastMessage("<" + displayPlayer.getDisplayName() + ">" + " " + bldr.toString());
+                    return true;
                 } else {
-                    sender.sendMessage(ChatColor.DARK_RED + "Unknown command! Type in " + ChatColor.AQUA + "/cp help");
+                    sender.sendMessage(ChatColor.DARK_RED + "This player is not online...");
                     return false;
                 }
+            } else if (args[0].equalsIgnoreCase("set")) {
+                if (args[1].equalsIgnoreCase("joinmsg")) {
+                    StringBuilder strb = new StringBuilder();
+
+                    for (int i = 2; i < args.length; i++) {
+                        if (i != 2) {
+                            strb.append(" ");
+                        }
+                        strb.append(args[i]);
+                    }
+                    cpapi.setJoinMessage(strb.toString());
+                    sender.sendMessage("[" + ChatColor.GOLD + "ChatPlus" + ChatColor.WHITE + "]" + ChatColor.AQUA + " Join message set!");
+                    return true;
+                }
+                if (args[1].equalsIgnoreCase("leavemsg")) {
+                    StringBuilder strb = new StringBuilder();
+
+                    for (int i = 2; i < args.length; i++) {
+                        if (i != 2) {
+                            strb.append(" ");
+                        }
+                        strb.append(args[i]);
+                    }
+                    cpapi.setLeaveMessage(strb.toString());
+                    return true;
+                }
+            } else {
+                sender.sendMessage("[" + ChatColor.GOLD + "ChatPlus" + ChatColor.WHITE + "]" + ChatColor.AQUA + " Leave message set!");
+                return false;
             }
-            return false;
         }
         return false;
     }
 }
+

@@ -27,7 +27,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ChatPlus extends JavaPlugin implements Listener {
@@ -48,6 +48,7 @@ public class ChatPlus extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        //Initialize metrics
         try {
             MetricsLite metrics = new MetricsLite(this);
             metrics.start();
@@ -55,8 +56,11 @@ public class ChatPlus extends JavaPlugin implements Listener {
             // Failed to submit the stats :-(
         }
 
+        //Instance for the API
         instance = this;
+
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
+
         log.info("[ChatPlus] Enabled successfully.");
         getCommand("cp").setExecutor(new CommandCp());
         this.saveDefaultConfig();
@@ -65,11 +69,12 @@ public class ChatPlus extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         log.info("[ChatPlus] Disabled successfully.");
+        saveConfig();
     }
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
-        if (paused == true) {
+        if (paused) {
             //Permissions/Op check
             if (e.getPlayer().hasPermission("chatplus.bypassPause")) {
             } else {
@@ -78,9 +83,25 @@ public class ChatPlus extends JavaPlugin implements Listener {
                 e.getPlayer().sendMessage(ChatColor.DARK_RED + "You cannot talk right now!");
             }
         }
-        if (nocaps == true) {
+        if (nocaps) {
             e.setMessage(e.getMessage().toLowerCase());
         }
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent e) {
+        String msgj = getConfig().getString("messages.join");
+        String msg = msgj.replace("%player%", e.getPlayer().getName());
+        msg = ChatColor.translateAlternateColorCodes('&', msg);
+        e.setJoinMessage(msg);
+    }
+
+    @EventHandler
+    public void onPlayerLeave(PlayerQuitEvent e) {
+        String msgl = getConfig().getString("messages.leave");
+        String msg = msgl.replace("%player%", e.getPlayer().getName());
+        msg = ChatColor.translateAlternateColorCodes('&', msg);
+        e.setQuitMessage(msg);
     }
 }
 

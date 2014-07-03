@@ -2,4 +2,7 @@ Commands:
     pauseChat: true
     noCaps: true
 chatcontrol:
+messages:
+    join: '&e%player% joined the game.'
+    leave: '&E%player% left the game.'
     
