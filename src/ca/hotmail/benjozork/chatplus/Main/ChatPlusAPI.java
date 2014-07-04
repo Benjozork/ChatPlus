@@ -71,9 +71,11 @@ public class ChatPlusAPI {
     }
 
     public String processMessageTags(String sourcemsg, Player player) {
-        String msgb = sourcemsg.replace("%player%", player.getName());
-        String msg = msgb.replace("%ip%", player.getAddress().toString());
-        msg = ChatColor.translateAlternateColorCodes('&', msg);
-        return msg;
+        sourcemsg = sourcemsg.replace("%player%", player.getName());
+        sourcemsg = sourcemsg.replace("%ip%", player.getAddress().toString());
+        sourcemsg = sourcemsg.replace("%displayname%", player.getDisplayName());
+        sourcemsg = sourcemsg.replace("%nbplayers%", ChatPlus.getInstance().getServer().getOnlinePlayers().size() + "");
+        sourcemsg = ChatColor.translateAlternateColorCodes('&', sourcemsg);
+        return sourcemsg;
     }
 }
