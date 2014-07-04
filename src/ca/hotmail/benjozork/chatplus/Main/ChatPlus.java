@@ -59,7 +59,7 @@ public class ChatPlus extends JavaPlugin implements Listener {
         //Instance for the API
         instance = this;
 
-        Bukkit.getServer().getPluginManager().registerEvents(this, this);
+        Bukkit.getServer().getPluginManager().registerEvents(new pluginListener(this), this);
 
         log.info("[ChatPlus] Enabled successfully.");
         getCommand("cp").setExecutor(new CommandCp());
@@ -70,38 +70,6 @@ public class ChatPlus extends JavaPlugin implements Listener {
     public void onDisable() {
         log.info("[ChatPlus] Disabled successfully.");
         saveConfig();
-    }
-
-    @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent e) {
-        if (paused) {
-            //Permissions/Op check
-            if (e.getPlayer().hasPermission("chatplus.bypassPause")) {
-            } else {
-                //Event cancelled
-                e.setCancelled(true);
-                e.getPlayer().sendMessage(ChatColor.DARK_RED + "You cannot talk right now!");
-            }
-        }
-        if (nocaps) {
-            e.setMessage(e.getMessage().toLowerCase());
-        }
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent e) {
-        String msgj = getConfig().getString("messages.join");
-        String msg = msgj.replace("%player%", e.getPlayer().getName());
-        msg = ChatColor.translateAlternateColorCodes('&', msg);
-        e.setJoinMessage(msg);
-    }
-
-    @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent e) {
-        String msgl = getConfig().getString("messages.leave");
-        String msg = msgl.replace("%player%", e.getPlayer().getName());
-        msg = ChatColor.translateAlternateColorCodes('&', msg);
-        e.setQuitMessage(msg);
     }
 }
 
