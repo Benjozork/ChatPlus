@@ -19,6 +19,7 @@ package ca.hotmail.benjozork.chatplus.Main;
 import ca.hotmail.benjozork.chatplus.Main.ChatPlus;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerEvent;
 
 /**
  *
@@ -67,5 +68,12 @@ public class ChatPlusAPI {
         sender.sendMessage(ChatColor.AQUA + "Please use one of these parameters to set:");
         sender.sendMessage(" - " + ChatColor.GOLD + "joinmsg");
         sender.sendMessage(" - " + ChatColor.GOLD + "leavemsg");
+    }
+
+    public String processMessageTags(String sourcemsg, Player player) {
+        String msgb = sourcemsg.replace("%player%", player.getName());
+        String msg = msgb.replace("%ip%", player.getAddress().toString());
+        msg = ChatColor.translateAlternateColorCodes('&', msg);
+        return msg;
     }
 }

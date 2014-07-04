@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
  * Created by Benjozork on 2014-07-04.
  */
 public class pluginListener implements Listener {
+    private ChatPlusAPI cpapi = new ChatPlusAPI();
     ChatPlus main;
 
     public pluginListener(ChatPlus main) {
@@ -36,16 +37,14 @@ public class pluginListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         String msgj = main.getConfig().getString("messages.join");
-        String msg = msgj.replace("%player%", e.getPlayer().getName());
-        msg = ChatColor.translateAlternateColorCodes('&', msg);
+        String msg = cpapi.processMessageTags(msgj, e.getPlayer());
         e.setJoinMessage(msg);
     }
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent e) {
         String msgl = main.getConfig().getString("messages.leave");
-        String msg = msgl.replace("%player%", e.getPlayer().getName());
-        msg = ChatColor.translateAlternateColorCodes('&', msg);
+        String msg = cpapi.processMessageTags(msgl, e.getPlayer());
         e.setQuitMessage(msg);
     }
 
