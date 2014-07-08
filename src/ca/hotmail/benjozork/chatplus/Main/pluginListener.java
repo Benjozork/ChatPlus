@@ -47,5 +47,4 @@ public class pluginListener implements Listener {
         String msg = cpapi.processMessageTags(msgl, e.getPlayer());
         e.setQuitMessage(msg);
     }
-
 }

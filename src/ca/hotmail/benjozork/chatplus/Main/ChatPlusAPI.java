@@ -1,25 +1,7 @@
-/*
- * Copyright (C) 2013 Benjozork
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package ca.hotmail.benjozork.chatplus.Main;
 
-import ca.hotmail.benjozork.chatplus.Main.ChatPlus;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerEvent;
 
 /**
  *
@@ -51,30 +33,45 @@ public class ChatPlusAPI {
         ChatPlus.getInstance().getConfig().set("messages.leave", msg);
     }
 
+    public String getJoinMessage() {
+        return ChatPlus.getInstance().getConfig().getString("messages.join");
+    }
+
+    public String getLeaveMessage() {
+        return ChatPlus.getInstance().getConfig().getString("messages.leave");
+    }
+
     public void displayHelpMessage(Player sender) {
-        sender.sendMessage(ChatColor.BLUE + "ChatPlus " + ChatPlus.getInstance().getDescription().getVersion() + " by" + ChatColor.LIGHT_PURPLE + " benjozork");
-        sender.sendMessage(ChatColor.GOLD + "/cp pause - Turns on/off the chat");
-        sender.sendMessage(ChatColor.GOLD + "/cp set <parameter> <value> - Assigns a value to a parameter");
-        sender.sendMessage(ChatColor.GOLD + "/cp help - Displays this message");
-        sender.sendMessage(ChatColor.GOLD + "/cp nocaps - Turns on/off message LowerCasing");
-        sender.sendMessage(ChatColor.GOLD + "/cp chatas <player> <message> - Chat as another player");
-        sender.sendMessage(ChatColor.GOLD + "/cp clear - Clears the chat");
-        sender.sendMessage(ChatColor.GOLD + "/cp join/leave - Broadcasts a fake join or leave message ! *trololol*");
-        sender.sendMessage(ChatColor.AQUA + "NYI commands");
-        sender.sendMessage(ChatColor.GOLD + "/cp nocmd - Block command usage");
+        sender.sendMessage(ChatColor.AQUA + "<" + ChatColor.BLUE + "======" + ChatColor.UNDERLINE + ChatColor.YELLOW +  " ChatPlus " + ChatPlus.getInstance().getDescription().getVersion() + " by" + ChatColor.LIGHT_PURPLE + " benjozork " + ChatColor.BLUE + "======" + ChatColor.AQUA + ">");
+        sender.sendMessage(ChatColor.GOLD + "/cp pause -" + ChatColor.GREEN + " Turns on/off the chat");
+        sender.sendMessage(ChatColor.GOLD + "/cp set <parameter> <value> -" + ChatColor.GREEN + " Assigns a value to a parameter");
+        sender.sendMessage(ChatColor.GOLD + "/cp help -" + ChatColor.GREEN + " Displays this message");
+        sender.sendMessage(ChatColor.GOLD + "/cp nocaps -" + ChatColor.GREEN + " Turns on/off message LowerCasing");
+        sender.sendMessage(ChatColor.GOLD + "/cp chatas <player> <message> -" + ChatColor.GREEN + " Chat as another player");
+        sender.sendMessage(ChatColor.GOLD + "/cp clear -" + ChatColor.GREEN + " Clears the chat");
+        sender.sendMessage(ChatColor.GOLD + "/cp join/leave -" + ChatColor.GREEN + " Broadcasts a fake join or leave message ! *trololol*");
     }
 
     public void displaySetHelpMessage(Player sender) {
         sender.sendMessage(ChatColor.AQUA + "Please use one of these parameters to set:");
-        sender.sendMessage(" - " + ChatColor.GOLD + "joinmsg");
-        sender.sendMessage(" - " + ChatColor.GOLD + "leavemsg");
+        sender.sendMessage(" - " + ChatColor.GOLD + "joinmsg: " + ChatColor.GREEN + "Player join message");
+        sender.sendMessage(" - " + ChatColor.GOLD + "leavemsg: " + ChatColor.GREEN + "Player leave message");
     }
 
     public String processMessageTags(String sourcemsg, Player player) {
         sourcemsg = sourcemsg.replace("%player%", player.getName());
         sourcemsg = sourcemsg.replace("%ip%", player.getAddress().toString());
         sourcemsg = sourcemsg.replace("%displayname%", player.getDisplayName());
-        sourcemsg = sourcemsg.replace("%nbplayers%", ChatPlus.getInstance().getServer().getOnlinePlayers().size() + "");
+        sourcemsg = sourcemsg.replace("%nbplayers%", (ChatPlus.getInstance().getServer().getOnlinePlayers().size() - 1) + "");
+        sourcemsg = ChatColor.translateAlternateColorCodes('&', sourcemsg);
+        return sourcemsg;
+    }
+
+    public String processMessageTagsWithFakePlayer(String sourcemsg, String player) {
+        sourcemsg = sourcemsg.replace("%player%", player);
+        sourcemsg = sourcemsg.replace("%ip%", "");
+        sourcemsg = sourcemsg.replace("%displayname%", player);
+        sourcemsg = sourcemsg.replace("%nbplayers%", ((ChatPlus.getInstance().getServer().getOnlinePlayers().size() +  1) + ""));
         sourcemsg = ChatColor.translateAlternateColorCodes('&', sourcemsg);
         return sourcemsg;
     }

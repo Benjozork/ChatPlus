@@ -1,27 +1,8 @@
 main: ca.hotmail.benjozork.chatplus.Main.ChatPlus
 name: chatPlus
-version: dev1.1.2
+version: 1.2
 author: benjozork
 commands:
    cp:
       description: The main command of the plugin.
-      permission: chatplus.main
       permission-message: You don't have permission for this command.
-permissions:
-    chatplus.*:
-        description: Gives access to all chatPlus commands and privileges.
-        children:
-            chatplus.main: true
-            chatplus.bypassPause: true
-    chatplus.vip:
-        descriptions: Allows players to bypass chat pausing.
-        children:
-            chatplus.main: false
-            chatplus.bypassPause: true
-    chatplus.main:
-        description: Gives access to all chatPlus commands.
-        default: op
-    chatplus.bypassPause:
-        description: Allows an user to bypass chat pausing.
-        default: op
-    
