@@ -37,14 +37,14 @@ public class pluginListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         String msgj = main.getConfig().getString("messages.join");
-        String msg = cpapi.processMessageTags(msgj, e.getPlayer());
+        String msg = cpapi.processMessageTags(msgj, e.getPlayer(), "", "PROCESS_PLAYERCOUNT_JOIN");
         e.setJoinMessage(msg);
     }
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent e) {
         String msgl = main.getConfig().getString("messages.leave");
-        String msg = cpapi.processMessageTags(msgl, e.getPlayer());
+        String msg = cpapi.processMessageTags(msgl, e.getPlayer(), "", "PROCESS_PLAYERCOUNT_LEAVE");
         e.setQuitMessage(msg);
     }
 }

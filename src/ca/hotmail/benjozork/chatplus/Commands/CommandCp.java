@@ -27,7 +27,7 @@ public class CommandCp implements CommandExecutor {
             }
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("pause")) {
-                    if (cpapi.isChatPaused() == true) {
+                    if (cpapi.isChatPaused()) {
                         cpapi.setPaused(false);
                         Bukkit.getServer().broadcastMessage("[" + ChatColor.GOLD + "ChatPlus" + ChatColor.WHITE + "]" + ChatColor.AQUA + " Chat is no longer paused!");
                         return true;
@@ -37,7 +37,7 @@ public class CommandCp implements CommandExecutor {
                         return true;
                     }
                 } else if (args[0].equalsIgnoreCase("nocaps")) {
-                    if (cpapi.isLowerCasingEnabled() == true) {
+                    if (cpapi.isLowerCasingEnabled()) {
                         cpapi.setLowerCasingEnabled(false);
                         Bukkit.getServer().broadcastMessage("[" + ChatColor.GOLD + "ChatPlus" + ChatColor.WHITE + "]" + ChatColor.AQUA + " LowerCasing off!");
                         return true;
@@ -71,10 +71,10 @@ public class CommandCp implements CommandExecutor {
         }
         if (args.length == 2) {
             if (args[0].equalsIgnoreCase("join")) {
-                Bukkit.broadcastMessage(cpapi.processMessageTagsWithFakePlayer(ChatPlus.getInstance().getConfig().getString("messages.join"), args[1]));
+                Bukkit.broadcastMessage(cpapi.processMessageTags(ChatPlus.getInstance().getConfig().getString("messages.join"), (Player) sender, args[1], "FAKE_PLAYER_PROCESS_JOIN"));
                 return true;
             } else if (args[0].equalsIgnoreCase("leave")) {
-                Bukkit.broadcastMessage(cpapi.processMessageTagsWithFakePlayer(ChatPlus.getInstance().getConfig().getString("messages.leave"), args[1]));
+                Bukkit.broadcastMessage(cpapi.processMessageTags(ChatPlus.getInstance().getConfig().getString("messages.leave"), (Player) sender, args[1], "FAKE_PLAYER_PROCESS_LEAVE"));
                 return true;
             } else if (args[0].equalsIgnoreCase("set")) {
                 sender.sendMessage(ChatColor.DARK_RED + "Please assign a value to that parameter");
