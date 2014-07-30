@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 /**
- *
  * @author Benjozork
  */
 public class ChatPlusAPI {
@@ -17,32 +16,32 @@ public class ChatPlusAPI {
         return ChatPlus.getInstance().nocaps;
     }
 
-    public void setPaused(boolean value) {
-        ChatPlus.getInstance().paused = value;
-    }
-
     public void setLowerCasingEnabled(boolean value) {
         ChatPlus.getInstance().nocaps = value;
     }
 
-    public void setJoinMessage(String msg) {
-        ChatPlus.getInstance().getConfig().set("messages.join", msg);
-    }
-
-    public void setLeaveMessage(String msg) {
-        ChatPlus.getInstance().getConfig().set("messages.leave", msg);
+    public void setPaused(boolean value) {
+        ChatPlus.getInstance().paused = value;
     }
 
     public String getJoinMessage() {
         return ChatPlus.getInstance().getConfig().getString("messages.join");
     }
 
+    public void setJoinMessage(String msg) {
+        ChatPlus.getInstance().getConfig().set("messages.join", msg);
+    }
+
     public String getLeaveMessage() {
         return ChatPlus.getInstance().getConfig().getString("messages.leave");
     }
 
+    public void setLeaveMessage(String msg) {
+        ChatPlus.getInstance().getConfig().set("messages.leave", msg);
+    }
+
     public void displayHelpMessage(Player sender) {
-        sender.sendMessage(ChatColor.AQUA + "<" + ChatColor.BLUE + "======" + ChatColor.UNDERLINE + ChatColor.YELLOW +  " ChatPlus " + ChatPlus.getInstance().getDescription().getVersion() + " by" + ChatColor.LIGHT_PURPLE + " benjozork " + ChatColor.BLUE + "======" + ChatColor.AQUA + ">");
+        sender.sendMessage(ChatColor.AQUA + "<" + ChatColor.BLUE + "======" + ChatColor.UNDERLINE + ChatColor.YELLOW + " ChatPlus " + ChatPlus.getInstance().getDescription().getVersion() + " by" + ChatColor.LIGHT_PURPLE + " benjozork " + ChatColor.BLUE + "======" + ChatColor.AQUA + ">");
         sender.sendMessage(ChatColor.GOLD + "/cp pause -" + ChatColor.GREEN + " Turns on/off the chat");
         sender.sendMessage(ChatColor.GOLD + "/cp set <parameter> <value> -" + ChatColor.GREEN + " Assigns a value to a parameter");
         sender.sendMessage(ChatColor.GOLD + "/cp help -" + ChatColor.GREEN + " Displays this message");
@@ -56,6 +55,9 @@ public class ChatPlusAPI {
         sender.sendMessage(ChatColor.AQUA + "Please use one of these parameters to set:");
         sender.sendMessage(" - " + ChatColor.GOLD + "joinmsg: " + ChatColor.GREEN + "Player join message");
         sender.sendMessage(" - " + ChatColor.GOLD + "leavemsg: " + ChatColor.GREEN + "Player leave message");
+        sender.sendMessage(" - " + ChatColor.GOLD + "pausemsg: " + ChatColor.GREEN + "Chat pause message");
+        sender.sendMessage(" - " + ChatColor.GOLD + "clearmsg: " + ChatColor.GREEN + "Chat clear message");
+        sender.sendMessage(" - " + ChatColor.GOLD + "nocapsmsg: " + ChatColor.GREEN + "Chat lowercasing message");
     }
 
     public String processMessageTags(String sourcemsg, Player player, String playername, String method) {
