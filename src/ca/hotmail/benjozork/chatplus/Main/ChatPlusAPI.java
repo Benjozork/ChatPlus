@@ -69,7 +69,7 @@ public class ChatPlusAPI {
 
     public String processMessageTagsWithFakePlayer(String sourcemsg, String player) {
         sourcemsg = sourcemsg.replace("%player%", player);
-        sourcemsg = sourcemsg.replace("%ip%", ""); //TODO Custom/Random IP adress from config ;) / Adresse IP aléatoire depuis la config,
+        sourcemsg = sourcemsg.replace("%ip%", ""); 
         sourcemsg = sourcemsg.replace("%displayname%", player);
         sourcemsg = sourcemsg.replace("%nbplayers%", ((ChatPlus.getInstance().getServer().getOnlinePlayers().size() +  1) + ""));
         sourcemsg = ChatColor.translateAlternateColorCodes('&', sourcemsg);
