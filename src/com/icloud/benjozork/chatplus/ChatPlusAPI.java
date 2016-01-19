@@ -1,4 +1,4 @@
-package com.icloud.benjozork.chatplus.main;
+package com.icloud.benjozork.chatplus;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -48,7 +48,7 @@ public class ChatPlusAPI {
         sender.sendMessage(ChatColor.GOLD + " - /cp nocaps:" + ChatColor.GREEN + " Turns on/off message LowerCasing");
         sender.sendMessage(ChatColor.GOLD + " - /cp chatas <player> <message>:" + ChatColor.GREEN + " Chat as another player");
         sender.sendMessage(ChatColor.GOLD + " - /cp clear:" + ChatColor.GREEN + " Clears the chat");
-        sender.sendMessage(ChatColor.GOLD + " - /cp join/leave:" + ChatColor.GREEN + " Broadcasts a fake join or leave message ! *trololol*");
+        sender.sendMessage(ChatColor.GOLD + " - /cp join/leave <player>:" + ChatColor.GREEN + " Broadcasts a fake join or leave message ! *trololol*");
     }
 
     public void displayChannelHelpMessage(Player sender) {
@@ -68,6 +68,7 @@ public class ChatPlusAPI {
 
     public String processMessageTags(String sourcemsg, Player player, String playername, String method) {
         if (method.startsWith("TWO")) {
+
             //TODO PvP messages
 
         } else if (method.startsWith("ONE") || method.startsWith("FAKE")) {

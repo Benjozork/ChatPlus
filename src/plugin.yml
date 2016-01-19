@@ -1,6 +1,6 @@
-main: com.icloud.benjozork.chatplus.main.ChatPlus
+main: com.icloud.benjozork.chatplus.ChatPlus
 name: ChatPlus
-version: 1.3a2
+version: 1.3a3
 author: benjozork
 commands:
    cp:

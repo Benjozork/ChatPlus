@@ -1,13 +1,14 @@
-package com.icloud.benjozork.chatplus.main;
+package com.icloud.benjozork.chatplus;
 
-import com.icloud.benjozork.chatplus.commands.CommandCh;
-import com.icloud.benjozork.chatplus.commands.CommandCp;
+import com.icloud.benjozork.chatplus.CommandHandlers.CommandCh;
+import com.icloud.benjozork.chatplus.CommandHandlers.CommandCp;
+import com.icloud.benjozork.chatplus.EventListeners.ChatListener;
+import com.icloud.benjozork.chatplus.EventListeners.PlayerListener;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import com.icloud.benjozork.chatplus.MetricsLite;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -22,8 +23,8 @@ public class ChatPlus extends JavaPlugin implements Listener {
     private static ChatPlus instance;
 
     private Logger log = Logger.getLogger("Minecraft");
-    Boolean paused = false;
-    Boolean nocaps = false;
+    public Boolean paused = false;
+    public Boolean nocaps = false;
 
     public static ChatPlus getInstance() {
         return instance;
@@ -44,7 +45,10 @@ public class ChatPlus extends JavaPlugin implements Listener {
         //Instance for the API
         instance = this;
 
-        Bukkit.getServer().getPluginManager().registerEvents(new PluginListener(this), this);
+        //Register event listeners
+        Bukkit.getServer().getPluginManager().registerEvents(new ChatListener(this), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+
 
         log.info("[ChatPlus] Enabled successfully.");
 

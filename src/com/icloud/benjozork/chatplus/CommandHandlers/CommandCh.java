@@ -1,6 +1,6 @@
-package com.icloud.benjozork.chatplus.commands;
+package com.icloud.benjozork.chatplus.CommandHandlers;
 
-import com.icloud.benjozork.chatplus.main.ChatPlusAPI;
+import com.icloud.benjozork.chatplus.ChatPlusAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
