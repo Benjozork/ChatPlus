@@ -1,4 +1,31 @@
+# ChatPlus by Benjozork. Config written by 1.3a3.
+
+# DO NOT EDIT THIS LINE ! TEST PURPOSES ONLY, **WILL** BREAK YOUR SERVER IF USED!
+## EVENT_PRIORITY_OVERRIDE: false
+# Thank you !
+
+# General config
+
+## If the message is colored when a staff member talks (requires user to have permission chatplus.flag.staff or be an Operator)
+color_staff_chat: false
+staff_chat_color: 'c' #Useless if top one is set to false
+
+## If the message is colored when a VIP member talks (requires user to have permission chatplus.flag.vip)
+color_vip_chat: false
+vip_chat_color: 'b'  #Useless if top one is set to false
+
+## Cancels the effects of chatplus.exempt permissions
+exempt_override: false
+
+# Messages
 messages:
     join: '&e%player% joined the game.'
     leave: '&e%player% left the game.'
+
+    pause_enabled:  '[&6ChatPlus&r]&b Chat is now paused!'
+    pause_disabled: '[&6ChatPlus&r]&b Chat is no longer paused!'
+    pause_chat_cancelled: '&cYou cannot talk right now.'
+
+    nocaps_enabled: '[&6ChatPlus&r]&b LowerCasing on!'
+    nocaps_disabled: '[&6ChatPlus&r]&b LowerCasing off!'
     

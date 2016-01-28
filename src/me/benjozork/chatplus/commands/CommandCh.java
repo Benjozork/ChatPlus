@@ -1,6 +1,6 @@
-package com.icloud.benjozork.chatplus.CommandHandlers;
+package me.benjozork.chatplus.commands;
 
-import com.icloud.benjozork.chatplus.ChatPlusAPI;
+import me.benjozork.chatplus.ChatPlusAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,7 +21,7 @@ public class CommandCh implements CommandExecutor {
 
                 //If the sender is the console then display message
                 if (!(sender instanceof Player)) {
-                    sender.sendMessage(ChatColor.RED + "Sorry, ChatPLus does not support console commands yet.");
+                    sender.sendMessage(ChatColor.RED + "Sorry, ChatPlus does not support console commands yet.");
                     return false;
                 }
 

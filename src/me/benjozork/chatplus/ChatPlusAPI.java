@@ -1,4 +1,4 @@
-package com.icloud.benjozork.chatplus;
+package me.benjozork.chatplus;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

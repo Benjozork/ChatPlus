@@ -1,9 +1,9 @@
-package com.icloud.benjozork.chatplus;
+package me.benjozork.chatplus;
 
-import com.icloud.benjozork.chatplus.CommandHandlers.CommandCh;
-import com.icloud.benjozork.chatplus.CommandHandlers.CommandCp;
-import com.icloud.benjozork.chatplus.EventListeners.ChatListener;
-import com.icloud.benjozork.chatplus.EventListeners.PlayerListener;
+import me.benjozork.chatplus.commands.CommandCh;
+import me.benjozork.chatplus.commands.CommandCp;
+import me.benjozork.chatplus.listeners.ChatListener;
+import me.benjozork.chatplus.listeners.PlayerListener;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -45,18 +45,14 @@ public class ChatPlus extends JavaPlugin implements Listener {
         //Instance for the API
         instance = this;
 
-        //Register event listeners
         Bukkit.getServer().getPluginManager().registerEvents(new ChatListener(this), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 
-
         log.info("[ChatPlus] Enabled successfully.");
 
-        //Set CommandExecutor for /cp
         getCommand("cp").setExecutor(new CommandCp());
-
-        //Set CommandExecutor for /ch
         getCommand("ch").setExecutor(new CommandCh());
+
         this.saveDefaultConfig();
     }
 

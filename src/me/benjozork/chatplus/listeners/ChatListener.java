@@ -1,7 +1,8 @@
-package com.icloud.benjozork.chatplus.EventListeners;
+package me.benjozork.chatplus.listeners;
 
-import com.icloud.benjozork.chatplus.ChatPlus;
-import com.icloud.benjozork.chatplus.ChatPlusAPI;
+import me.benjozork.chatplus.ChatPlus;
+import me.benjozork.chatplus.ChatPlusAPI;
+
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,7 +34,18 @@ public class ChatListener implements Listener {
 
         //If lowercasing is enabled
         if (main.getInstance().nocaps) {
-            e.setMessage(e.getMessage().toLowerCase());
+            //Permissions/Op check
+            if (!e.getPlayer().hasPermission("chatplus.exempt.nocaps")) {
+                //Message toLC
+                e.setMessage(e.getMessage().toLowerCase());
+            }
+        }
+
+        //Color staff/VIP chat
+        if (e.getPlayer().hasPermission("chatplus.flag.staff")) {
+            e.setMessage(ChatColor.RED + e.getMessage());
+        } else if (e.getPlayer().hasPermission("chatplus.flag.vip")) {
+            e.setMessage(ChatColor.BLUE + e.getMessage());
         }
 
     }

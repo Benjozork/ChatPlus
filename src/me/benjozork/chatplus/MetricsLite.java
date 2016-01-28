@@ -1,4 +1,4 @@
-package com.icloud.benjozork.chatplus;
+package me.benjozork.chatplus;
 
 /*
 * Copyright 2011-2013 Tyler Blair. All rights reserved.

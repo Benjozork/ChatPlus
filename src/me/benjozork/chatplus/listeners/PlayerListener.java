@@ -1,7 +1,8 @@
-package com.icloud.benjozork.chatplus.EventListeners;
+package me.benjozork.chatplus.listeners;
 
-import com.icloud.benjozork.chatplus.ChatPlus;
-import com.icloud.benjozork.chatplus.ChatPlusAPI;
+import me.benjozork.chatplus.ChatPlus;
+import me.benjozork.chatplus.ChatPlusAPI;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
